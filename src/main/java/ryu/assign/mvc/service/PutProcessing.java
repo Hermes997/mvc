@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,14 +25,12 @@ public class PutProcessing {
 	
 	HttpServletRequest request;
 	HttpServletResponse response;
-	HttpSession session;
 	
 	//리스트는 스프링에서 관리
 	@Autowired
 	UploadList uploadList;
 	
-	static String redirect = "/post";
-	//static String uploadListName = "uploadListName";
+	static String redirect = "/home";
 	
 	//요청에 의한 의존성 주입
 	public PutProcessing (FreePost freePost, HttpServletRequest request, HttpServletResponse response) {
@@ -45,25 +42,19 @@ public class PutProcessing {
 		
 	}
 
-	public void PostService () throws IOException {
-		
-		//this.session = request.getSession();
+	public void service () throws IOException {
 		
 		//new를 쓰지 않고 날짜 데이터를 불러오는 방식
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
 		
-		//id는 자바클래스에서 부여
+		freePost.setId(Integer.parseInt(request.getParameter("id")));
 		freePost.setTitle(request.getParameter("title"));
 		freePost.setContents(request.getParameter("contents"));
 		freePost.setPublisher(request.getParameter("publisher"));
 		freePost.setUploadTime(dateTime.format(formatter));
 		
-		uploadList.addPost(freePost);
-		
-		//REST FULL
-		//session.setAttribute(uploadListName, uploadList);
-		
+		uploadList.changePost(freePost.getId(), freePost);
 		response.sendRedirect(redirect);
 		
 	}

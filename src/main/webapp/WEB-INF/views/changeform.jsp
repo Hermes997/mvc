@@ -12,9 +12,9 @@
 
 </head>
 <body>
+		id : <input type="text" name="id" value="1" /><br>
 		title : <input type="text" name="title" value="title1" /><br>
 	    contents : <input type="text" name="contents" value="contents1" /><br>
 	    publisher : <input type="text" name="publisher" value="ryu1" /><br>
-	
 </body>
 </html>

@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,14 +25,12 @@ public class PostProcessing {
 	
 	HttpServletRequest request;
 	HttpServletResponse response;
-	HttpSession session;
 	
 	//리스트는 스프링에서 관리
 	@Autowired
 	UploadList uploadList;
 	
 	static String redirect = "/home";
-	//static String uploadListName = "uploadListName";
 	
 	//요청에 의한 의존성 주입
 	public PostProcessing (FreePost freePost, HttpServletRequest request, HttpServletResponse response) {
@@ -45,9 +42,7 @@ public class PostProcessing {
 		
 	}
 
-	public void postService () throws IOException {
-		
-		//this.session = request.getSession();
+	public void service () throws IOException {
 		
 		//new를 쓰지 않고 날짜 데이터를 불러오는 방식
 		LocalDateTime dateTime = LocalDateTime.now();
@@ -60,10 +55,6 @@ public class PostProcessing {
 		freePost.setUploadTime(dateTime.format(formatter));
 		
 		uploadList.addPost(freePost);
-		
-		//REST FULL
-		//session.setAttribute(uploadListName, uploadList);
-		
 		response.sendRedirect(redirect);
 		
 	}

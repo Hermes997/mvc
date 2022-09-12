@@ -25,7 +25,23 @@ public class UploadList {
 	
 	public void changePost(int id, FreePost post) {
 		
-		postItems.replace(id, post);
+		if(postItems.containsKey(id)) {
+			postItems.replace(id, post);
+			System.out.println("수정되었습니다");
+		} else {
+			System.out.println("해당 아이디는 존재하지 않습니다");
+		}
+		
+	}
+	
+	public void deletePost(int id) {
+		
+		if(postItems.containsKey(id)) {
+			postItems.remove(id);
+			System.out.println("삭제되었습니다");
+		} else {
+			System.out.println("해당 아이디는 존재하지 않습니다");
+		}
 		
 	}
 	
@@ -34,17 +50,7 @@ public class UploadList {
 		return postItems.values();
 		
 	}
-	
-	
-	/*
-	public Collection<FreePost> printAll() {
-		System.out.println(postItems.size());
-		System.out.println(postItems.get(1));
-		System.out.println(postItems);
-		return postItems.values();
-		
-	}*/
-	
+
 	
 	public FreePost selFreePost(int id) {
 		return postItems.get(id);

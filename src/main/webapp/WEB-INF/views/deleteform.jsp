@@ -12,9 +12,6 @@
 
 </head>
 <body>
-
-		id : <input type="text" name="title" value="title1" /><br>
-
-
+		id : <input type="text" name=id value="1" /><br>
 </body>
 </html>

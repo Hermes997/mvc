@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,7 +74,7 @@ public class PostController {
 		postProcessing.setRequest(request);
 		postProcessing.setResponse(response);
 		
-		postProcessing.postService();
+		postProcessing.service();
 		
 		return "/home";
 	}
@@ -81,12 +82,21 @@ public class PostController {
 	@PutMapping("/free")
 	public String putProcessing(@Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		postProcessing.postService();
+		putProcessing.setFreePost(freePost);
+		putProcessing.setRequest(request);
+		putProcessing.setResponse(response);
+		
+		putProcessing.service();
 		
 		return "/home";
 	}
 	
-	
-	//@PutMapping("/pos")
+	@DeleteMapping("/free/{id}")
+	public String deleteProcessing(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		uploadList.deletePost(id);
+		
+		return "/home";
+	}
 	
 }
