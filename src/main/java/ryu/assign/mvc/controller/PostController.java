@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ryu.assign.mvc.model.FreePost;
@@ -68,7 +69,7 @@ public class PostController {
 	
 	//에러는 validation 영향을 받는 객체다음에 선언되어야함
 	@PostMapping("/free")
-	public @ResponseBody void postProcessing(@Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody void postProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 			
 		postProcessing.setFreePost(freePost);
 		postProcessing.setRequest(request);
@@ -79,7 +80,7 @@ public class PostController {
 	}
 	
 	@PutMapping("/free")
-	public @ResponseBody void putProcessing(@Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody void putProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		putProcessing.setFreePost(freePost);
 		putProcessing.setRequest(request);

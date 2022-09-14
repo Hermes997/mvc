@@ -2,6 +2,7 @@ package ryu.assign.mvc.controller;
 
 import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ryu.assign.mvc.model.FreePost;
+import ryu.assign.mvc.model.UploadList;
 import ryu.assign.mvc.service.PostProcessing;
 
 
@@ -34,7 +36,10 @@ class PostControllerTest {
 	@Autowired
     private Validator validatorInjected;
 	
-	/*
+	
+	@Autowired
+	UploadList uploadList;
+	
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -46,25 +51,25 @@ class PostControllerTest {
 	
 	@Autowired
 	PostProcessing postprocessing;
+
 	
 	@Test
-	public void testPostProcessingSuccess()  throws Exception {
+	public void testPostProcessingSuccess() throws Exception {
 		
-		freePost.setId(999);
 		freePost.setTitle("title999");
 		freePost.setContents("contents999");
 		freePost.setPublisher("ryu999");
-		freePost.setUploadTime("22-09-04 14:20:35");
 		
 		 String content = objectMapper.writeValueAsString(freePost);
-
+		 
 		 mockMvc.perform(post("/free")
 			.content(content)
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andDo(null);
+			.andExpect(status().is3xxRedirection())
+			.andDo(print());
 	  }
+	
 	
 	@Test
 	public void testPostProcessingFail()  throws Exception {
@@ -81,10 +86,11 @@ class PostControllerTest {
 			.content(content)
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andDo(null);
+			.andExpect(status().is4xxClientError())
+			.andDo(print());
 	  }
-	*/
+	
+	
 	
 	
 	@Test

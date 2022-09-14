@@ -1,6 +1,8 @@
 package ryu.assign.mvc.service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,10 @@ public abstract class Processing {
 	
 	HttpServletRequest request;
 	HttpServletResponse response;
+	
+	//new를 쓰지 않고 날짜 데이터를 불러오는 방식
+	LocalDateTime dateTime = LocalDateTime.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
 	
 	//리스트는 스프링에서 관리
 	@Autowired

@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ryu.assign.mvc.validation.PublisherCheck;
@@ -12,7 +11,6 @@ import ryu.assign.mvc.validation.PublisherCheck;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class FreePost implements Post{
 	
 	//int 대신 Integer
