@@ -1,6 +1,8 @@
 package ryu.assign.mvc.controller;
 
 import static org.mockito.ArgumentMatchers.contains;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,9 +17,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ryu.assign.mvc.model.FreePost;
+import ryu.assign.mvc.service.PostProcessing;
 
 
 @RunWith(SpringRunner.class)
@@ -34,32 +41,51 @@ class PostControllerTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	@Autowired
+	FreePost freePost;
+	
+	@Autowired
+	PostProcessing postprocessing;
+	
 	@Test
 	public void testPostProcessingSuccess()  throws Exception {
-		 String content = objectMapper.writeValueAsString(FreePost.builder()
-				 .id(999).title("title999").contents("contents999").publisher("ryu999").uploadTime("22-09-04 14:20:35").build());
+		
+		freePost.setId(999);
+		freePost.setTitle("title999");
+		freePost.setContents("contents999");
+		freePost.setPublisher("ryu999");
+		freePost.setUploadTime("22-09-04 14:20:35");
+		
+		 String content = objectMapper.writeValueAsString(freePost);
 
-		 mockMvc.perform(post("/postprocessing")
+		 mockMvc.perform(post("/free")
 			.content(content)
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
-			.andReturn();
+			.andDo(null);
 	  }
 	
 	@Test
 	public void testPostProcessingFail()  throws Exception {
-		 String content = objectMapper.writeValueAsString(FreePost.builder()
-				 .id(999).title("").contents("contents999").publisher("ryu???!!!").uploadTime("22-09-04 14:20:35").build());
+		
+		freePost.setId(999);
+		freePost.setTitle("title999");
+		freePost.setContents("contents999");
+		freePost.setPublisher("ryu???!!!");
+		freePost.setUploadTime("22-09-04 14:20:35");
+		
+		 String content = objectMapper.writeValueAsString(freePost);
 
-		 mockMvc.perform(post("/postprocessing")
+		 mockMvc.perform(post("/free")
 			.content(content)
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
-			.andReturn();
+			.andDo(null);
 	  }
 	*/
+	
 	
 	@Test
     void PublisherTestSuccess() {
@@ -141,4 +167,5 @@ class PostControllerTest {
         Assertions.assertThat(messages).isNotIn(contains("제목은 빈칸으로 할 수 없습니다"));
         Assertions.assertThat(messages).isNotIn(contains("내용은 한 글자 이상입니다"));
     }
+    
 }
