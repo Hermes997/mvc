@@ -69,7 +69,7 @@ public class PostController {
 	
 	//에러는 validation 영향을 받는 객체다음에 선언되어야함
 	@PostMapping("/free")
-	public @ResponseBody void postProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody FreePost postProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 			
 		postProcessing.setFreePost(freePost);
 		postProcessing.setRequest(request);
@@ -77,10 +77,11 @@ public class PostController {
 		
 		postProcessing.service();
 
+		return freePost;
 	}
 	
 	@PutMapping("/free")
-	public @ResponseBody void putProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody FreePost putProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		putProcessing.setFreePost(freePost);
 		putProcessing.setRequest(request);
@@ -88,6 +89,7 @@ public class PostController {
 		
 		putProcessing.service();
 		
+		return freePost;
 	}
 	
 	@DeleteMapping("/free/{id}")

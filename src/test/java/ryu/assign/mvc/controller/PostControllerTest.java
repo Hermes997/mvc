@@ -77,7 +77,7 @@ class PostControllerTest {
 		freePost.setId(999);
 		freePost.setTitle("title999");
 		freePost.setContents("contents999");
-		freePost.setPublisher("ryu???!!!");
+		freePost.setPublisher("ryu   ");
 		freePost.setUploadTime("22-09-04 14:20:35");
 		
 		 String content = objectMapper.writeValueAsString(freePost);
@@ -91,30 +91,8 @@ class PostControllerTest {
 	  }
 	
 	
-	
-	
 	@Test
     void PublisherTestSuccess() {
-
-		FreePost request = new FreePost(999, "title999", "contents999", "ryu???", "22-09-04 14:20:35");
-
-        // when
-        Set<ConstraintViolation<FreePost>> validate = validatorInjected.validate(request);
-
-        // then
-        Iterator<ConstraintViolation<FreePost>> iterator = validate.iterator();
-        List<String> messages = new ArrayList<>();
-        while (iterator.hasNext()) {
-            ConstraintViolation<FreePost> next = iterator.next();
-            messages.add(next.getMessage());
-            System.out.println("message = " + next.getMessage());
-        }
-
-        Assertions.assertThat(messages).contains("작성자는 영문또는 숫자입니다");
-    }
-	
-	@Test
-    void PublisherTestFail() {
 
 		FreePost request = new FreePost(999, "title999", "contents999", "ryu999", "22-09-04 14:20:35");
 
@@ -130,8 +108,30 @@ class PostControllerTest {
             System.out.println("message = " + next.getMessage());
         }
 
-        Assertions.assertThat(messages).isNotIn(contains("작성자는 영문또는 숫자입니다"));
+        Assertions.assertThat(messages).isNotIn(contains("작성자는 빈 공백을 포함하지 않아야 합니다"));
     }
+	
+	
+	@Test
+    void PublisherTestFail() {
+
+		FreePost request = new FreePost(999, "title999", "contents999", "ryu   ", "22-09-04 14:20:35");
+
+        // when
+        Set<ConstraintViolation<FreePost>> validate = validatorInjected.validate(request);
+
+        // then
+        Iterator<ConstraintViolation<FreePost>> iterator = validate.iterator();
+        List<String> messages = new ArrayList<>();
+        while (iterator.hasNext()) {
+            ConstraintViolation<FreePost> next = iterator.next();
+            messages.add(next.getMessage());
+            System.out.println("message = " + next.getMessage());
+        }
+
+        Assertions.assertThat(messages).contains("작성자는 빈 공백을 포함하지 않아야 합니다");
+    }
+
 	
 	@Test
     void TitleContentsTestSuccess() {

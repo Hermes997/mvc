@@ -10,6 +10,6 @@ public class PublisherValidation implements ConstraintValidator<PublisherCheck, 
         if (value == null) {
             return false;
         }
-        return value.matches("\\w+");
+        return value.matches("[^\\s]*$");
     }
 }

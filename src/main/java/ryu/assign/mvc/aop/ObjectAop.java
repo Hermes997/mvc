@@ -1,22 +1,18 @@
 package ryu.assign.mvc.aop;
 
-import java.lang.reflect.Method;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import ryu.assign.mvc.model.FreePost;
 
 @Aspect
 @Component
-public class AOP {
-
-    @Pointcut("execution(* ryu.assign.mvc.controller..*.*(..))")
-    private void cut() {}
-
+public class ObjectAop {
+    
+    /*
     @Before("cut()")
     public void before(JoinPoint joinPoint) {
 		
@@ -39,4 +35,5 @@ public class AOP {
         System.out.println("return obj");
         System.out.println(obj);
     }
+    */
 }

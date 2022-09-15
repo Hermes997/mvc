@@ -12,7 +12,7 @@ put, delete의 경우 postman API활용
 컨트롤러에서 요청에 의한 값을 체크하기 위해 @Valid 어노테이션을 활용하여 값 검증, CustomValidation 생성
 컨트롤러에서 별도의 비즈니스로직이 필요한 경우 service패키지에 @Service 클래스를 요청함
 
-Jnit 실습을 위해 Validation기능 테스트를 중심으로 테스트 클래스 설계
+Jnit 실습을 위해 Controller, Validation기능 테스트를 중심으로 테스트 클래스 설계
 
 REST API 구축을 위한 CRUD지향의 컨트롤러설계
 기능에 대한 적절한 주소를 mapping, PathVariable에 의한 컨트롤러 제어

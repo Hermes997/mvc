@@ -22,7 +22,7 @@ public class FreePost implements Post{
 	@NotEmpty(message = "내용은 한 글자 이상입니다")
 	private String contents;
 	
-	@PublisherCheck(message = "작성자는 영문또는 숫자입니다")
+	@PublisherCheck(message = "작성자는 빈 공백을 포함하지 않아야 합니다")
 	private String publisher;
 	
 	private String uploadTime;
