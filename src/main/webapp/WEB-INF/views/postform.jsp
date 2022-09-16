@@ -4,16 +4,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+	<meta charset="UTF-8">
+	<title>jQuery Event</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+		$(function() {
+			$("#btn").on("click", function() {
+				
+				$.ajax({
+					  url:"/free",
+					  type:"POST",
+					  data:JSON.stringify({
+						  title: $('#title').val(),
+						 contents: $('#contents').val(),
+						 publisher: $('#publisher').val()
+					  }),
+					  contentType:"application/json; charset=utf-8",
+					  dataType:"json",
+					  success: function(data){
+					    console.log("전송성공");
+					  }
+					});
+		    });
+		});
+	// id가 "btn"인 요소에 이벤트 핸들러를 등록함.
+	</script>
 </head>
+
 <body>
-	<form action="/free" method="post">
-		title : <input type="text" name="title" value="title1" /><br>
-	    contents : <input type="text" name="contents" value="contents1" /><br>
-	    publisher : <input type="text" name="publisher" value="ryu1" /><br>
-	    <input type= "submit" value="게시물 작성" />
-	</form>
+		title : <input type="text" id="title" name="title" value="title1" /><br>
+	    contents : <input type="text" id="contents" name="contents" value="contents1" /><br>
+	    publisher : <input type="text" id="publisher" name="publisher" value="cnl1MQ==" /><br>
+		<button id="btn">게시물 등록</button>
+	
 </body>
+
+
 </html>

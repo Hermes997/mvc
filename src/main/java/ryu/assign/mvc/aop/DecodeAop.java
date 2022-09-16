@@ -18,8 +18,7 @@ public class DecodeAop {
     @Pointcut("execution(* ryu.assign.mvc.controller..*.*(..))")
     private void cut() {}
 
-  //@Around("cut() && enableDecode()")
-  //ProceedingJoinPoint joinPoint.proceed()
+
     @Before("cut()")
     public void before(JoinPoint joinPoint) throws Throwable {
         
@@ -60,6 +59,7 @@ public class DecodeAop {
         
     }
 	
+
     
     @AfterReturning(value = "cut()", returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint, Object returnObj) {
@@ -76,4 +76,20 @@ public class DecodeAop {
         }
 
     }
+    
+    
+    /*
+    @Around("cut() && enableDecode()")
+    public void around(ProceedingJoinPoint joinPoint) {
+    	
+    	//joinPoint.ABCD
+    	//.....
+    	
+    	
+    	//joinPoint.proceed();
+    	
+    	
+    	//............
+    }
+    */
 }

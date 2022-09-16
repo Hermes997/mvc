@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +37,12 @@ public class PostController {
 	
 	@Autowired
 	UploadList uploadList;
+	
+	@GetMapping("/jstest")
+	public String jsTest() {
+		
+		return "/jstest";
+	}
 	
 	@GetMapping("/home")
 	public String home() {
@@ -68,7 +75,7 @@ public class PostController {
 	}
 	
 	//에러는 validation 영향을 받는 객체다음에 선언되어야함
-	@PostMapping("/free")
+	@PostMapping(value = "/free", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody FreePost postProcessing(@RequestBody @Validated FreePost freePost, HttpServletRequest request, HttpServletResponse response) throws IOException {
 			
 		postProcessing.setFreePost(freePost);
