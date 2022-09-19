@@ -4,14 +4,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+	<meta charset="UTF-8">
+	<title>jQuery Event</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+		$(function() {
+			$("#btn").on("click", function() {
+				
+				$.ajax({
+					  url:"/free",
+					  type:"PUT",
+					  data:JSON.stringify({
+						  id: $('#id').val(),
+						  title: $('#title').val(),
+						 contents: $('#contents').val(),
+						 publisher: $('#publisher').val()
+					  }),
+					  contentType:"application/json; charset=utf-8",
+					  dataType:"json",
+					  success: function(data){
+					    console.log("전송성공");
+					  }
+					});
+		    });
+		});
+	</script>
 </head>
 <body>
-		id : <input type="text" name="id" value="1" /><br>
-		title : <input type="text" name="title" value="title1" /><br>
-	    contents : <input type="text" name="contents" value="contents1" /><br>
-	    publisher : <input type="text" name="publisher" value="ryu1" /><br>
+		id : <input type="text" id= 'id' name="id" value="1" /><br>
+		title : <input type="text" id="title" name="title" value="title1" /><br>
+	    contents : <input type="text" id="contents" name="contents" value="contents1" /><br>
+	    publisher : <input type="text" id="publisher" name="publisher" value="cnl1MQ==" /><br>
+	    <button id="btn">게시물 수정</button>
 </body>
 </html>

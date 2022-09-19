@@ -73,6 +73,7 @@ public class DecodeAop {
             	
             user.setPublisher(base64email);  //user 객체 디코드
             System.out.println("인코딩 후 : " + base64email);
+            System.out.println("");
         }
 
     }
