@@ -38,3 +38,5 @@ Create README.md : Create README.md
 22091700 : jquery의 ajax를 이용한 form에서 json데이터변환 구현, AOP클래스 주석 추가
 
 22091918 : 생성, 수정, 삭제를 위한 뷰에 ajax post, put, delete 기능 매핑완료
+
+22092022 : withoutSql 버전 분리
