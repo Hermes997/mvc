@@ -22,11 +22,21 @@ AOP를 활용한 로깅기능 실행 메소드, 객체 추적
 
 
 커밋기록
+
 Initial commit : mvc 구현, rest api 미완성, junit mockmvc 오류잔존
+
 22091218 : rest api 완성, service 보완, junit mockmvc 오류잔존
+
 22091418 : 간단한 AOP 참조 및 생성, service 추상화, junit mockmvc 오류잔존
+
 Create README.md : Create README.md
+
 22091423 : junit mockmvc 해결, form에서 json데이터변환 미비, class 보완, junit 보완
+
 22091602 : Decode AOP 참조 및 customizing, AOP에서 validation 및 요청데이터 수정기능 추가, custom validation 수정
+
 22091700 : jquery의 ajax를 이용한 form에서 json데이터변환 구현, AOP클래스 주석 추가
+
 22091918 : 생성, 수정, 삭제를 위한 뷰에 ajax post, put, delete 기능 매핑완료
+
+22092022 : withoutSql 버전분리
